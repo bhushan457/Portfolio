@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hirehub",
+      "description": "HireHub Job Portal Interface",
+      "imageUrl": "https://picsum.photos/seed/bhushan-hirehub/800/600",
+      "imageHint": "job board"
+    },
+    {
+      "id": "shopsphere",
+      "description": "ShopSphere E-Commerce Platform",
+      "imageUrl": "https://picsum.photos/seed/bhushan-shopsphere/800/600",
+      "imageHint": "ecommerce store"
+    },
+    {
+      "id": "medical-plant",
+      "description": "AI Plant Identification System",
+      "imageUrl": "https://picsum.photos/seed/bhushan-plant/800/600",
+      "imageHint": "medical plants"
+    },
+    {
+      "id": "sales-dashboard",
+      "description": "Interactive Sales Analytics Dashboard",
+      "imageUrl": "https://picsum.photos/seed/bhushan-sales/800/600",
+      "imageHint": "data analytics"
+    }
+  ]
 }
