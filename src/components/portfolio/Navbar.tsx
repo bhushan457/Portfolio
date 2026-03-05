@@ -28,9 +28,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 lg:px-12 py-4",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 lg:px-12 py-4",
         scrolled ? "glass py-3 shadow-lg" : "bg-transparent"
       )}
     >
@@ -40,53 +43,67 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
+        <div className="hidden md:flex items-center space-x-10">
+          {navLinks.map((link, idx) => (
+            <motion.div
               key={link.name}
-              href={link.href}
-              className="text-sm font-medium hover:text-primary transition-colors relative group"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * idx + 0.5 }}
             >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-            </Link>
+              <Link
+                href={link.href}
+                className="text-sm font-medium hover:text-primary transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+            </motion.div>
           ))}
         </div>
 
         {/* Mobile Toggle */}
-        <button
+        <motion.button
+          whileTap={{ scale: 0.9 }}
           className="md:hidden text-foreground p-2"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 glass md:hidden border-t border-white/10"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 right-0 glass md:hidden border-t border-white/10 overflow-hidden"
           >
-            <div className="flex flex-col p-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
+            <div className="flex flex-col p-6 space-y-6">
+              {navLinks.map((link, idx) => (
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium hover:text-primary transition-colors"
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 * idx }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-xl font-medium hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

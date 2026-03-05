@@ -5,111 +5,123 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 relative">
+    <section id="about" className="py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative h-[400px] flex items-center justify-center"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative h-[400px] flex items-center justify-center order-2 lg:order-1"
           >
             {/* Live Animation Replacement */}
-            <div className="relative w-64 h-64">
+            <div className="relative w-80 h-80">
               <motion.div
                 animate={{
-                  rotate: 360,
-                  scale: [1, 1.1, 1],
+                  rotate: [0, 360],
+                  borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "50% 50% 50% 50% / 50% 50% 50% 50%", "30% 70% 70% 30% / 30% 30% 70% 70%"],
                 }}
                 transition={{
-                  duration: 10,
+                  duration: 20,
                   repeat: Infinity,
                   ease: "linear",
                 }}
-                className="absolute inset-0 border-2 border-dashed border-primary/40 rounded-full"
+                className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 blur-2xl"
               />
               <motion.div
                 animate={{
                   rotate: -360,
-                  scale: [1, 1.2, 1],
+                  scale: [1, 1.1, 1],
                 }}
                 transition={{
                   duration: 15,
                   repeat: Infinity,
                   ease: "linear",
                 }}
-                className="absolute inset-4 border-2 border-dotted border-secondary/40 rounded-full"
+                className="absolute inset-4 border-2 border-dashed border-primary/40 rounded-[40%]"
               />
               <motion.div
                 animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.5, 1, 0.5],
+                  rotate: 360,
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 25,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
-                className="absolute inset-0 flex items-center justify-center"
+                className="absolute inset-10 border border-dotted border-secondary/40 rounded-[30%]"
+              />
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="absolute inset-0 flex items-center justify-center z-10"
               >
-                <div className="w-32 h-32 bg-primary/20 blur-3xl rounded-full absolute" />
-                <div className="relative z-10 text-6xl font-bold text-gradient">{}</div>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="w-24 h-24 text-primary"
-                >
-                  <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-                </svg>
+                <div className="relative group cursor-pointer">
+                  <motion.div 
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-40 h-40 glass rounded-3xl border border-white/20 flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-primary/20"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="w-16 h-16 text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]"
+                    >
+                      <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                    </svg>
+                  </motion.div>
+                  {/* Floating elements */}
+                  <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 0.5 }} className="absolute -top-4 -right-4 w-12 h-12 glass rounded-full flex items-center justify-center border border-white/10 text-secondary font-bold">JS</motion.div>
+                  <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 3.5, repeat: Infinity, delay: 1 }} className="absolute -bottom-4 -left-4 w-10 h-10 glass rounded-full flex items-center justify-center border border-white/10 text-primary font-bold">React</motion.div>
+                </div>
               </motion.div>
             </div>
-            
-            {/* Decorative elements */}
-            <div className="absolute -top-6 -left-6 w-32 h-32 border-l-4 border-t-4 border-primary rounded-tl-3xl z-0" />
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 border-r-4 border-b-4 border-secondary rounded-br-3xl z-0" />
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="order-1 lg:order-2"
           >
-            <h2 className="text-3xl md:text-5xl font-headline font-bold mb-8">
+            <h2 className="text-4xl md:text-5xl font-headline font-bold mb-8">
               About <span className="text-gradient">Me</span>
             </h2>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light">
               <p>
-                I am a passionate Software Developer who enjoys building modern web applications and solving real-world
-                problems through technology.
+                I am a passionate <span className="text-foreground font-medium">Software Developer</span> dedicated to building immersive web applications that combine aesthetic design with robust engineering.
               </p>
               <p>
-                I specialize in full-stack web development using technologies like React, JavaScript, Node.js, and Python.
-                I enjoy creating clean user interfaces, scalable backend systems, and intelligent applications.
+                My expertise lies in full-stack development, leveraging the power of <span className="text-primary font-medium">React, Next.js, and Node.js</span> to create scalable systems. I thrive on solving complex problems and turning ideas into interactive reality.
               </p>
               <p>
-                I have built several projects including a job portal, an e-commerce platform, and an AI-based plant
-                identification system. I'm constantly learning and pushing the boundaries of what's possible in the
-                web ecosystem.
+                From developing sophisticated e-commerce platforms to AI-powered identification systems, I am constantly exploring new frontiers in tech to deliver high-impact solutions.
               </p>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-8">
-              <div>
-                <h4 className="text-2xl font-bold text-foreground">5+</h4>
-                <p className="text-sm text-muted-foreground uppercase tracking-widest">Projects Completed</p>
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-foreground">3+</h4>
-                <p className="text-sm text-muted-foreground uppercase tracking-widest">Tech Domains</p>
-              </div>
-              <div>
-                <h4 className="text-2xl font-bold text-foreground">∞</h4>
-                <p className="text-sm text-muted-foreground uppercase tracking-widest">Learning Drive</p>
-              </div>
+            <div className="mt-12 flex flex-wrap gap-12">
+              {[
+                { label: "Projects Completed", value: "5+" },
+                { label: "Tech Domains", value: "3+" },
+                { label: "Learning Drive", value: "∞" }
+              ].map((stat, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 * idx }}
+                >
+                  <h4 className="text-3xl font-bold text-foreground mb-1">{stat.value}</h4>
+                  <p className="text-xs text-muted-foreground uppercase tracking-[0.2em] font-bold">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
