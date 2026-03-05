@@ -18,17 +18,26 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+
+    // Simulate delay
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    // Construct mailto link to send details to user's email
+    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:bhushansonawane259@gmail.com?subject=${subject}&body=${body}`;
 
     setIsSubmitting(false);
     setIsSuccess(true);
     toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
+      title: "Opening Email Client",
+      description: "Preparing your message for bhushansonawane259@gmail.com",
     });
 
-    // Reset success state after a while
     setTimeout(() => setIsSuccess(false), 5000);
     (e.target as HTMLFormElement).reset();
   };
@@ -51,7 +60,7 @@ export default function Contact() {
 
             <div className="space-y-6">
               <a
-                href="mailto:contact@bhushansonawane.com"
+                href="mailto:bhushansonawane259@gmail.com"
                 className="flex items-center gap-4 group hover:text-primary transition-colors"
               >
                 <div className="p-4 rounded-xl glass border border-white/10 group-hover:border-primary/50 transition-colors">
@@ -59,7 +68,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email Me</p>
-                  <p className="text-lg font-medium">contact@bhushansonawane.com</p>
+                  <p className="text-lg font-medium">bhushansonawane259@gmail.com</p>
                 </div>
               </a>
 
@@ -94,6 +103,7 @@ export default function Contact() {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-muted-foreground ml-1">Name</label>
                 <Input
+                  name="name"
                   required
                   placeholder="John Doe"
                   className="bg-white/5 border-white/10 focus:border-primary transition-all h-12"
@@ -102,6 +112,7 @@ export default function Contact() {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-muted-foreground ml-1">Email</label>
                 <Input
+                  name="email"
                   required
                   type="email"
                   placeholder="john@example.com"
@@ -111,6 +122,7 @@ export default function Contact() {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-muted-foreground ml-1">Message</label>
                 <Textarea
+                  name="message"
                   required
                   placeholder="How can I help you?"
                   className="bg-white/5 border-white/10 focus:border-primary transition-all min-h-[150px] resize-none"
@@ -124,10 +136,10 @@ export default function Contact() {
                 }`}
               >
                 {isSubmitting ? (
-                  "Sending..."
+                  "Preparing..."
                 ) : isSuccess ? (
                   <span className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5" /> Message Sent
+                    <CheckCircle2 className="w-5 h-5" /> Opening Mail
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
